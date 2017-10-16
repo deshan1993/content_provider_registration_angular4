@@ -1,0 +1,744 @@
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="#">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active">Tables</li>
+</ol>
+
+<div id="outline">
+
+    <div class="row">
+        <div class="col-md-12" id="title">
+            <h3 style="margin-top: 0px;margin-bottom: 0px;padding-top: 10px;padding-bottom: 10px;">Content Provider Registration Screen</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-5">
+            <label class="form-check-label">
+                Specify whether content provider is,
+            </label>
+        </div>
+        <div id="radioB1" class="col-md-2">
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" [(ngModel)]="applicantType" type="radio" name="applicantType" id="applicantType" value="individual"
+                        checked> An Individual
+                </label>
+            </div>
+        </div>
+
+        <div id="radioB2" class="col-md-5">
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" [(ngModel)]="applicantType" type="radio" name="applicantType" id="applicantType" value="institute"> Educational Institution / Professional body
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <form id="individual-category" [formGroup]="contentProviderForm" (ngSubmit)="submitForm()" *ngIf="applicantType && applicantType=='individual'">
+        <div class="col-md-12">
+            <h6>&emsp;If Individual,</h6>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input type="text" class="form-control form-control-sm" id="cpName" placeholder="Full Name" formControlName="cpName" [(ngModel)]="contentProviderIndividual.cpName"
+                        [ngClass]="displayFieldCssIndividual('cpName')" name="cpName">
+                    <div class="error" *ngIf="isFieldValidIndividual('cpName')">
+                        Required!
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <input id="cpFullName" name="cpFullName" class="form-control form-control-sm" type="text" formControlName="cpFullName" [(ngModel)]="contentProviderIndividual.cpFullName"
+                    [ngClass]="displayFieldCssIndividual('cpFullName')" placeholder="Name with Initials:">
+                <div class="error" *ngIf="isFieldValidIndividual('cpFullName')">
+                    Required!
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <select id="gender" name="gender" class="form-control form-control-sm" style="margin-top: 7px;" formControlName="gender"
+                            [(ngModel)]="contentProviderIndividual.gender" [ngClass]="displayFieldCssIndividual('gender')">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="error" *ngIf="isFieldValidIndividual('gender')">
+                            Required!
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <input id="cpNic" name="cpNic" class="form-control form-control-sm" type="text" placeholder="N.I.C:" minlength="10" maxlength="15"
+                    formControlName="cpNic" [(ngModel)]="contentProviderIndividual.cpNic" [ngClass]="displayFieldCssIndividual('cpNic')">
+                <div class="error" *ngIf="isFieldValidIndividual('cpNic')">
+                    Required!
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <input id="cpDesignation" name="cpDesignation" class="form-control form-control-sm" type="text" placeholder="Designation:"
+                    formControlName="cpDesignation" [(ngModel)]="contentProviderIndividual.cpDesignation" [ngClass]="displayFieldCssIndividual('cpDesignation')">
+                <div class="error" *ngIf="isFieldValidIndividual('cpDesignation')">
+                    Required!
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div id="label_dob" class="col-md-5" style="margin-top: 10px; padding-left: 4px;">
+                        Date of birth:
+                    </div>
+                    <div id="dob" class="col-md-7" style="padding-right:0px;">
+                        <input type="text" id="cpDob" name="cpDob" class="form-control form-control-sm" formControlName="cpDob" [(ngModel)]="contentProviderIndividual.cpDob"
+                            [ngClass]="displayFieldCssIndividual('cpDob')">
+                        <div class="error" *ngIf="isFieldValidIndividual('cpDob')">
+                            Required!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <input type="email" id="cpEmail" name="cpEmail" class="form-control form-control-sm" type="text" placeholder="Email:" formControlName="cpEmail"
+                    [(ngModel)]="contentProviderIndividual.cpEmail" [ngClass]="displayFieldCssIndividual('cpEmail')">
+                <div class="error" *ngIf="isFieldValidIndividual('cpEmail')">
+                    Required!
+                </div>
+            </div>
+            <div class="col-md-6">
+                <input id="cpMobile" name="cpMobile" class="form-control form-control-sm" type="text" placeholder="Contact No:" onkeydown="phoneno()"
+                    maxlength="10" formControlName="cpMobile" [(ngModel)]="contentProviderIndividual.cpMobile" [ngClass]="displayFieldCssIndividual('cpMobile')">
+                <div class="error" *ngIf="isFieldValidIndividual('cpMobile')">
+                    Required!
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <hr>
+            </div>
+        </div>
+
+        <!--Highest education qualification-->
+        <div>
+            <div class="row">
+                <h6>&emsp;Highest education level achieved,</h6>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="row">
+                    <label id="label1">Qualification Achieved</label>
+                </div>
+                <div class="row">
+                    <input id="highest_quali" name="highest_quali" class="form-control form-control-sm" style="width:100%;" type="text">
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="row">
+                    <label id="label2">University / Institute</label>
+                </div>
+                <div class="row">
+                    <input id="highest_uni" name="highest_uni" class="form-control form-control-sm" type="text">
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="row">
+                    <label id="label3">Grade recieved</label>
+                </div>
+                <div class="row">
+                    <input id="highest_grade" name="highest_grade" class="form-control form-control-sm" type="text">
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="row">
+                    <label id="label4">Country</label>
+                </div>
+                <div class="row">
+                    <!-- <?php echo $select_country1; ?> -->
+                    <select class="form-control form-control-sm" style="margin-top: 7px; width:100%;">
+                        <option>Sri Lanka</option>
+                        <option>India</option>
+                        <option>England</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="row">
+                    <label id="label5">Year of completion</label>
+                </div>
+                <div class="row">
+                    <!-- <?php
+                      //drop down year list for highest education
+                      $selected = "";
+                      echo '<select name="highest_year" id="highest_year" class="form-control form-control-sm" style="margin-top: 7px;">';
+                      $cur_year = date('Y');
+                      echo '<option value="" selected="selected"></option>';
+                      for($year = ($cur_year-25); $year <= ($cur_year); $year++) {
+                          if ($year == $cur_year) {
+                              echo '<option value="'.$year.'">'.$year.'</option>';
+                          } else {
+                              echo '<option value="'.$year.'">'.$year.'</option>';
+                          }
+                      }               
+                      echo '</select>';
+                  ?> -->
+                    <select class="form-control form-control-sm" style="margin-top: 7px; width:100%">
+                        <option>2017</option>
+                        <option>2016</option>
+                        <option>2015</option>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+
+        <!--Professional qualification-->
+        <div class="row">
+            <h6>&emsp;Professional qualification details,</h6>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <div class="row">
+                    <label id="label6">Qualification</label>
+                </div>
+                <div class="row">
+                    <!-- <?php echo $select3; ?> -->
+                    <select class="form-control form-control-sm" style="margin-top: 7px; width:100%">
+                        <option>CIMA</option>
+                        <option>SLIIT</option>
+                        <option>NSBM</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="row">
+                    <label id="label7">University / Institute</label>
+                </div>
+                <div class="row">
+                    <input id="uniName_row0" name="uniName_row[0]" class="form-control form-control-sm" type="text">
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="row">
+                    <label id="label8">Grade recieved</label>
+                </div>
+                <div class="row">
+                    <!-- <?php echo $select4; ?> -->
+                    <select class="form-control form-control-sm" style="margin-top: 7px; width:100%">
+                        <option>First class</option>
+                        <option>Second Upper</option>
+                        <option>Second Lower</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="row">
+                    <label id="label9">Year of completion</label>
+                </div>
+                <div class="row">
+                    <!-- <?php
+                                          //drop down year list for highest education
+                                          echo '<select name="year_row[0]" id="year_row0" class="form-control form-control-sm" style="margin-top: 7px;">';
+                                          $cur_year = date('Y');
+                                          echo '<option value="" selected="selected"></option>';
+                                          for($year = ($cur_year-25); $year <= ($cur_year); $year++) {
+                                          if ($year == $cur_year) {
+                                                 echo '<option value="'.$year.'">'.$year.'</option>';
+                                          } else {
+                                                 echo '<option value="'.$year.'">'.$year.'</option>';
+                                          }
+                                          }               
+                                          echo '</select>';
+                                   ?> -->
+                    <select class="form-control form-control-sm" style="margin-top: 7px; width:100%">
+                        <option>2017</option>
+                        <option>2016</option>
+                        <option>2015</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="row">
+                    <label id="label10">Country</label>
+                </div>
+                <div class="row">
+                    <!-- <?php echo $select_country2; ?> -->
+                    <select class="form-control form-control-sm" style="margin-top: 7px; width:100%">
+                        <option>Sri Lanka</option>
+                        <option>India</option>
+                        <option>England</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-1">
+                <div class="row">
+
+                </div>
+                <div class="row">
+                    <button id="add_btn_row1" type="button" (click)="show_row2()" class="btn btn-info" style="margin-top: 33px;">+</button>
+                </div>
+            </div>
+        </div>
+
+        <!--second row-->
+        <div id="row_2" class="row">
+            <div class="col-md-2">
+                <div class="row">
+                    <!-- <?php echo $select7; ?> -->
+                    <select class="form-control form-control-sm" style="margin-top: 7px; width:100%">
+                        <option>CIMA</option>
+                        <option>SLIIT</option>
+                        <option>NSBM</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="row">
+                    <input id="uniName_row1" name="uniName_row[1]" class="form-control form-control-sm" type="text">
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="row">
+                    <!-- <?php echo $select8; ?> -->
+                    <select class="form-control form-control-sm" style="margin-top: 7px; width:100%">
+                        <option>First class</option>
+                        <option>Second Upper</option>
+                        <option>Second Lower</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="row">
+                    <!-- <?php
+                                          //drop down year list for highest education
+                                          echo '<select name="year_row[1]" id="year_row1" class="form-control form-control-sm" style="margin-top: 7px;">';
+                                          $cur_year = date('Y');
+                                          echo '<option value="" selected="selected"></option>';
+                                          for($year = ($cur_year-25); $year <= ($cur_year); $year++) {
+                                                 if ($year == $cur_year) {
+                                                 echo '<option value="'.$year.'">'.$year.'</option>';
+                                                 } else {
+                                                 echo '<option value="'.$year.'">'.$year.'</option>';
+                                                 }
+                                          }               
+                                          echo '</select>';
+                                          ?> -->
+                    <select class="form-control form-control-sm" style="margin-top: 7px; width:100%">
+                        <option>2017</option>
+                        <option>2016</option>
+                        <option>2015</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="row">
+                    <!-- <?php echo $select_country9; ?> -->
+                    <select class="form-control form-control-sm" style="margin-top: 7px; width:100%">
+                        <option>Sri Lanka</option>
+                        <option>India</option>
+                        <option>England</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-1" style="padding-left: 0px;padding-right: 0px;">
+                <div class="row">
+                    <button id="remove_btn_row2" (click)="hide_row2()" type="button" class="btn btn-info" style="">-</button>
+                    <button id="add_btn_row2" (click)="show_row3()" type="button" class="btn btn-info" style="margin-left: 3px;width: 33.979166px;border-left-width: 0px;">+</button>
+                </div>
+            </div>
+        </div>
+
+        <!--third row-->
+        <div id="row_3" class="row">
+            <div class="col-md-2">
+                <div class="row">
+                    <!-- <?php echo $select10; ?> -->
+                    <select class="form-control form-control-sm" style="margin-top: 7px; width:100%">
+                        <option>CIMA</option>
+                        <option>SLIIT</option>
+                        <option>NSBM</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="row">
+                    <input id="uniName_row2" name="uniName_row[2]" class="form-control form-control-sm" type="text">
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="row">
+                    <!-- <?php echo $select11; ?> -->
+                    <select class="form-control form-control-sm" style="margin-top: 7px; width:100%">
+                        <option>First class</option>
+                        <option>Second Upper</option>
+                        <option>Second Lower</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="row">
+                    <!-- <?php
+                                          //drop down year list for highest education
+                                          echo '<select name="year_row[2]" id="year_row2" class="form-control form-control-sm" style="margin-top: 7px;">';
+                                          $cur_year = date('Y');
+                                          echo '<option value="" selected="selected"></option>';
+                                          for($year = ($cur_year-25); $year <= ($cur_year); $year++) {
+                                                 if ($year == $cur_year) {
+                                                 echo '<option value="'.$year.'">'.$year.'</option>';
+                                                 } else {
+                                                 echo '<option value="'.$year.'">'.$year.'</option>';
+                                                 }
+                                          }               
+                                          echo '</select>';
+                                          ?> -->
+                    <select class="form-control form-control-sm" style="margin-top: 7px; width:100%">
+                        <option>2017</option>
+                        <option>2016</option>
+                        <option>2015</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="row">
+                    <!-- <?php echo $select_country12; ?> -->
+                    <select class="form-control form-control-sm" style="margin-top: 7px; width:100%">
+                        <option>Sri Lanka</option>
+                        <option>India</option>
+                        <option>England</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-1" style="padding-left: 0px;padding-right: 0px;">
+                <div class="row">
+                    <button id="remove_btn_row3" type="button" (click)="hide_row3()" class="btn btn-info" style="">-</button>
+                    <!--<button id="add_btn_row3" type="button" class="btn btn-info" style="">-</button>-->
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <hr>
+            </div>
+        </div>
+
+        <!--expertise subject-->
+        <!--Subject fo areas expertise-->
+        <div class="row">
+            <div class="col-md-3" style="padding-right: 0px;padding-left: 15px;margin-top: 8px;">
+                <h6>&emsp;Subject Area of Expertise: </h6>
+            </div>
+
+            <div class="col-md-3">
+                <!-- <?php echo $select_subject1; ?> -->
+                <select class="form-control form-control-sm" style="margin-top: 7px; width:100%">
+                    <option>Management</option>
+                    <option>IT</option>
+                    <option>Science</option>
+                </select>
+                <button id="add_subject_btn1" type="button" (click)="add_subject2()" class="btn btn-info" style="margin-top: 5px; float:right;">+</button>
+            </div>
+
+            <div class="col-md-3">
+                <!-- <?php echo $select_subject2; ?> -->
+                <select id="expert_subject2" class="form-control form-control-sm" style="margin-top: 7px; width:100%;">
+                    <option>Management</option>
+                    <option>IT</option>
+                    <option>Science</option>
+                </select>
+                <button name="remove_subject_btn2" id="remove_subject_btn2" type="button" (click)="remove_subject2()" class="btn btn-info"
+                    style="margin-top: 5px;float: right;width: 35.979166px;">-</button>
+                <button id="add_subject_btn2" type="button" (click)="add_subject3()" class="btn btn-info" style="margin-top: 5px; margin-right:5px; float:right;">+</button>
+            </div>
+
+            <div class="col-md-3">
+                <!-- <?php echo $select_subject3; ?> -->
+                <select id="expert_subject3" class="form-control form-control-sm" style="margin-top: 7px; width:100%;">
+                    <option>Management</option>
+                    <option>IT</option>
+                    <option>Science</option>
+                </select>
+                <button name="remove_subject_btn3" id="remove_subject_btn3" type="button" (click)="remove_subject3()" class="btn btn-info"
+                    style="margin-top: 5px; width:35.979166px; float:right;">-</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <hr>
+            </div>
+        </div>
+
+        <div class="row">
+            <!--Area you representing an institute / Professional body-->
+            <div class="col-md-6">
+                <h6>&emsp;Area you representing an institute / Professional body: </h6>
+            </div>
+            <div id="yes_btn_1" class="col-md-2" style="margin-top: 6px;">
+                &emsp;
+                <input class="form-check-input" type="radio" name="radio-btn3" value="1" id="radio-btn3" style="margin-top: 7px;" (click)="show_course()">
+                <span>&emsp;Yes</span>
+            </div>
+            <div id="no_btn_1" class="col-md-2" style="margin-top: 6px;">
+                &emsp;
+                <input class="form-check-input" type="radio" name="radio-btn3" value="0" id="radio-btn4" style="margin-top: 7px;" (click)="hide_course()"
+                    checked>
+                <span>&emsp;No</span>
+            </div>
+            <div class="col-md-2">
+                <!-- <?php echo $select6; ?> -->
+                <select id="courses" class="form-control form-control-sm" (change)="show_other_institute()" style="margin-top:7px; width:100%;">
+                    <option value="CIMA">CIMA</option>
+                    <option value="SLIIT">SLIIT</option>
+                    <option value="NSBM">NSBM</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4" id="other-field1">
+                <h6 style="margin-top:13px;">&emsp;If other, please specify:</h6>
+            </div>
+            <div class="col-md-4" id="other-field">
+                <input id="other-details" name="other-details" class="form-control form-control-sm" type="text">
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <hr>
+            </div>
+        </div>
+
+        <!--Content Provider Identification No:-->
+        <div class="row">
+            <div class="col-md-4" style="margin-top: 7px;">
+                <h6>&emsp;Content Provider Identification No:</h6>
+            </div>
+            <div class="col-md-4">
+                <!-- <input name="cpId" id="cpId" class="form-control form-control-sm" type="text" value="<?php echo $cp_id; ?>" readonly><br> -->
+                <input id="cpId" name="cpId" class="form-control form-control-sm" type="text" readonly>
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <hr>
+            </div>
+        </div>
+
+        <!--Terms &amp; conditions-->
+        <div class="col-lg-12">
+            <textarea id="terms" name="terms" class="form-control" id="exampleFormControlTextarea1" style="padding-bottom: 14px;" rows="5"
+                col="1" placeholder="Terms &amp; Conditions" readonly></textarea>
+            <br>
+        </div>
+
+        <div class="col-lg-12">
+            &emsp;&emsp;
+            <input type="checkbox" id="check1" name="check1" class="form-check-input">
+            <span>&nbsp;&nbsp;&nbsp;I hereby acknowledge that I have read and agree to the above terms and conditions</span>
+            <br>
+            <br>
+            <br>
+        </div>
+
+        <div id="form1_submit_row" class="row" style="width:100%;">
+            <div class="col-lg-9">
+                <!-- <input type="text" id="count_new" name="count_new" value="<?php echo $count_new; ?>" style="display:none;"> -->
+            </div>
+            <div class="col-lg-3">
+                <button type="submit" id="cancel1" name="cancel1" class="btn btn-primary">Cancel</button>&emsp;
+                <button type="submit" id="submit1" name="submit1" class="btn btn-primary">Submit</button>
+                <br>
+                <br>
+                <br>
+                <br>
+            </div>
+        </div>
+    </form>
+
+
+    <form [formGroup]="contentProviderInstituteForm" (ngSubmit)="submitInstitueForm()" *ngIf="applicantType && applicantType=='institute'">
+        <div class="row">
+            <div class="col-md-12">
+                <h6>
+                    <br>&emsp;If Educational Institution / Professional body,</h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <input id="instName" name="instName" class="form-control form-control-sm" type="text" placeholder="Name of the Educational Institution / Professional Body:">
+            </div>
+            <div class="col-md-6">
+                <input id="regNo" name="regNo" class="form-control form-control-sm" type="text" placeholder="Business Registration No:">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6" style="margin-top: 10px; padding-left: 4px;">
+                        Date of Registration:
+                    </div>
+                    <div class="col-md-6" style="padding-right:0px;">
+                        <input type="text" id="dateOfReg" name="dateOfReg" class="form-control form-control-sm" placeholder="Date of Registration:">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <input id="adrz" name="adrz" class="form-control form-control-sm" type="text" placeholder="Business Address:">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <input id="mobileNum" name="mobileNum" class="form-control form-control-sm" type="text" placeholder="Contact No:" onkeydown="phoneno1()"
+                    maxlength="10" />
+            </div>
+            <div class="col-md-6">
+                <input id="person_no" name="person_no" class="form-control form-control-sm" type="text" placeholder="Contact Person No:"
+                    onkeydown="phoneno2()" maxlength="10" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <input id="foreignUni" name="foreignUni" class="form-control form-control-sm" type="text" placeholder="Affiliated Foreign Universities:">
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6" style="margin-top: 10px; padding-left: 4px;">
+                        Content Provider Identification No:
+                    </div>
+                    <div class="col-md-6" style="padding-right:0px;">
+                        <!-- <input id="instId" name="instId" class="form-control form-control-sm" type="text" value="<?php echo $cp_inst_id; ?>" readonly> -->
+                        <input id="instId" name="instId" class="form-control form-control-sm" type="text" readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <hr>
+            </div>
+        </div>
+        
+        <!--expertise subject-->
+        <!--Subject fo areas expertise-->
+        <div class="row">
+            <div class="col-md-3">
+                <h6>&emsp;Subject Area of Expertise: </h6>
+            </div>
+            <div class="col-md-3">
+                <!-- <?php echo $select_sub1; ?> -->
+                <select id="expert_sub1" class="form-control form-control-sm" type="text">
+                    <option>Management</option>
+                    <option>IT</option>
+                    <option>Science</option>
+                </select>
+                <button id="add_sub_btn1" type="button" class="btn btn-info" (click)="add_expert_sub2()" style="margin-top: 5px; float:right;">+</button>
+            </div>
+            <div class="col-md-3">
+                <!-- <?php echo $select_sub2; ?> -->
+                <select id="expert_sub2" class="form-control form-control-sm" type="text">
+                    <option>Management</option>
+                    <option>IT</option>
+                    <option>Science</option>
+                </select>
+                <button id="add_sub_btn2" type="button" class="btn btn-info" (click)="add_expert_sub3()" style="margin-top:5px; float:right;">+</button>
+                <button name="remove_sub_btn2" id="remove_sub_btn2" type="button" class="btn btn-info" (click)="remove_expert_sub2()" style="margin-top:5px; width: 35.979166px; margin-right:5px; float:right;">-</button>
+            </div>
+            <div class="col-md-3">
+                <!-- <?php echo $select_sub3; ?> -->
+                <select id="expert_sub3" class="form-control form-control-sm" type="text">
+                    <option>Management</option>
+                    <option>IT</option>
+                    <option>Science</option>
+                </select>
+                <button name="remove_sub_btn3" id="remove_sub_btn3" type="button" class="btn btn-info" (click)="remove_expert_sub3()" style="margin-top:5px; width: 35.979166px; float:right;">-</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <hr>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <!--Terms &amp; conditions-->
+            <div class="col-md-12">
+                <textarea id="textarea" class="form-control" id="exampleFormControlTextarea1" style="padding-bottom: 14px;" rows="5" col="1"
+                    placeholder="Terms &amp; Conditions" readonly></textarea>
+                <br>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                &emsp;&emsp;
+                <input type="checkbox" id="check2" name="check2" class="form-check-input">
+                <span>&nbsp;&nbsp;&nbsp;I hereby acknowledge that I have read and agree to the above terms and conditions</span>
+                <br>
+                <br>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-9">
+                <!-- <input type="text" name="id2" id="id2" value="<?php echo $count_inst_new; ?>" style="display:none"> -->
+            </div>
+            <div class="col-lg-3">
+                <button type="submit" class="btn btn-primary">Cancel</button>&emsp;
+                <button type="submit" id="submit2" name="submit2" class="btn btn-primary">Submit</button>
+                <br>
+                <br>
+                <br>
+                <br>
+            </div>
+        </div>
+    </form>
+</div>
+<br>
