@@ -13,8 +13,6 @@
     "Dilan Perera <dilan.perera@premiasoft.com>",
     "Nadeeshani Senevirathna <nadeeshani.senevirathna@lk.pwc.com>"
   ],
- 
-
   "license": "MIT",
   "dependencies": {
     "@angular/animations": "~4.2.0",
@@ -53,7 +51,6 @@
     "systemjs": "^0.19.40",
     "zone.js": "0.8.12"
   },
-
   "devDependencies": {
     "@types/node": "^6.0.45",
     "angular-router-loader": "^0.5.0",
@@ -61,18 +58,18 @@
     "awesome-typescript-loader": "^3.0.4",
     "clean-webpack-plugin": "^0.1.16",
     "compression-webpack-plugin": "^0.4.0",
+    "copy-webpack-plugin": "~4.0.1",
     "css-loader": "^0.26.1",
     "extract-text-webpack-plugin": "^2.1.2",
     "favicons-webpack-plugin": "0.0.7",
     "html-webpack-plugin": "^2.29.0",
     "raw-loader": "^0.5.1",
     "to-string-loader": "^1.1.4",
-    "typescript": "~2.3.1",
-    "webpack": "2.2.1",
+    "typescript": "^2.3.4",
+    "webpack": "^2.2.1",
     "webpack-bundle-analyzer": "^2.8.2",
     "webpack-dev-server": "2.4.1",
-    "webpack-merge": "^3.0.0",
-    "copy-webpack-plugin": "~4.0.1"
+    "webpack-merge": "^3.0.0"
   },
   "keywords": [
     "Angular2",

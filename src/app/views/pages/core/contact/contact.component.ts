@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl,Validators } from '@angular/forms';
 import CustomValidators from '../../../../common/validation/CustomValidators';
 
-import { DialogsService } from '../../../../services/dialog/dialogs.service';
 import { ToastService } from '../../../../services/toast/toast.service';
 import { ToastType } from '../../../../services/toast/toast.model';
 
