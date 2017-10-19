@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from '@angular/material';
 
 import { NgUploaderModule } from 'ngx-uploader';
 
@@ -41,6 +42,8 @@ import { StartupService } from './services/settings/application-startup.service'
 import { ToastService } from './services/toast/toast.service';
 import { ToastCommunicationService } from './services/toast/toast-communication.service';
 
+import { DialogsService } from './services/dialog/dialogs.service';
+import { DialogsModule } from './services/dialog/dialogs.module';
 
 import { LocalStorageStore } from './services/storage/local-storage.service';
 import { DataTableComponent } from './views/widgets/widget/data-table/data-table.component';
@@ -74,6 +77,7 @@ export function startupServiceFactory(startupService: StartupService): Function 
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    MaterialModule,
     AppRoutingModule,
     SharedModule,
     FormsModule,
@@ -88,6 +92,7 @@ export function startupServiceFactory(startupService: StartupService): Function 
     ToastyModule.forRoot(), 
     DndModule.forRoot(), 
     SlimLoadingBarModule.forRoot(),
+    DialogsModule,
     LocalStorageModule.withConfig({
         prefix: 'iecd-citizen-app',
         storageType: 'localStorage'
@@ -107,6 +112,7 @@ export function startupServiceFactory(startupService: StartupService): Function 
     },
     ToastService,
     ToastCommunicationService,
+    DialogsService,
     LocalStorageStore
   ],
   exports: [

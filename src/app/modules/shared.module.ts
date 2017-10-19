@@ -3,6 +3,7 @@ import { CommonModule }        from '@angular/common';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 
+import { MaterialModule, MdDatepickerModule, MdNativeDateModule } from '@angular/material';
 
 import { HttpModule, Http,XHRBackend,RequestOptions } from '@angular/http';
 
@@ -10,7 +11,10 @@ import { HttpModule, Http,XHRBackend,RequestOptions } from '@angular/http';
 @NgModule({
   imports:      [ 
     CommonModule,
-    HttpModule    
+    HttpModule,    
+    MaterialModule,
+    MdDatepickerModule, 
+    MdNativeDateModule
   ],
   declarations: [ 
  ],
@@ -18,6 +22,7 @@ import { HttpModule, Http,XHRBackend,RequestOptions } from '@angular/http';
     CommonModule, 
     HttpModule,
     TranslateModule,
+    MaterialModule 
   ]
 })
 export class SharedModule { }
