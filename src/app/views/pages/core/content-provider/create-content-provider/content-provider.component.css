@@ -1,5 +1,31 @@
 #outline{
     border: 2px solid #58ACFA;
+    margin-bottom: 50px;
+}
+
+input.ng-invalid {border-left: 5px solid red}
+input.ng-valid {border-left: 5px solid green}
+select.ng-invalid {border-left: 5px solid red}
+select.ng-valid {border-left: 5px solid green}
+
+#mainTitle{
+    margin-top: 0px;margin-bottom: 0px;padding-top: 10px;padding-bottom: 10px;
+}
+
+label{
+    font-size: 14px;
+}
+
+.subTitle{
+    font-size: 14px;
+}
+
+button{
+    font-size: 14px;
+}
+
+textarea{
+    font-size: 14px;
 }
 
 #title{
@@ -7,6 +33,111 @@
     color: white;
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+#title1{
+    margin-top:10px;
+}
+
+#label_dob{
+    margin-top: 10px; padding-left: 4px;
+}
+
+#gender1{
+    padding-right:0px;
+}
+
+#gender{
+    margin-top: 7px; width:100%;
+}
+
+#label_dob{
+    margin-top: 10px; padding-left: 4px;
+}
+
+#dob{
+    padding-right:0px;
+}
+
+#highest_quali{
+    width:100%;
+}
+
+.quali1{
+    margin-top: 7px; width:100%; margin-bottom:10px;
+}
+
+.quali2{
+    margin-top: 7px; width:100%;
+}
+
+#add_btn_row2{
+    margin-left: 3px;width: 33.979166px;border-left-width: 0px;
+}
+
+#x1{
+    padding-left: 0px;padding-right: 0px;
+}
+#x2{
+    padding-left: 0px;padding-right: 0px;
+}
+#x3{
+    padding-right: 0px;padding-left: 15px;margin-top: 8px;
+}
+#add_btn_row1{
+    margin-top: 33px;
+}
+#expert_subject2{
+    margin-top: 7px; width:100%; display:none;
+}
+#remove_subject_btn2{
+    margin-top: 5px;float: right;width: 35.979166px; display:none;
+}
+#add_subject_btn2{
+    margin-top: 5px; margin-right:5px; float:right; display:none;
+}
+#expert_subject3{
+    margin-top: 7px; width:100%; display:none;
+}
+#add_subject_btn3{
+    margin-top: 0px; display:none;
+}
+#remove_subject_btn3{
+    margin-top: 5px; width:35.979166px; display:none; float:right;
+}
+#add_subject_btn1{
+    margin-top: 5px; float:right;
+}
+
+#yes_btn_1{
+    margin-top: 6px;
+}
+#no_btn_1{
+    margin-top: 6px;
+}
+
+#courses{
+    margin-top:7px; width:100%; display:none;
+}
+#other-field1{
+    display:none;
+}
+#other-field{
+    display:none;
+}
+#x4{
+    margin-top: 7px;
+}
+#terms{
+    padding-bottom: 14px;
+}
+
+#highest_quali{
+    width:100%;
+}
+
+.drop{
+    margin-top: 7px; width:100%; margin-bottom:10px;
 }
 
 .row{
@@ -20,6 +151,49 @@
 
 #radio-btn4{
     margin-top: 7px;   
+}
+
+#professional-category{
+    display:none;
+}
+#x5{
+    margin-top:18px;
+}
+#x6{
+    margin-top: 10px; padding-left: 4px;
+}
+#x7{
+    padding-right:0px;
+}
+#x8{
+    margin-top: 10px; padding-left: 4px;
+}
+#x9{
+    padding-right:0px;
+}
+#add_sub_btn1{
+    margin-top: 5px; float:right;
+}
+#expert_sub2{
+    display:none;
+}
+#add_sub_btn2{
+    margin-top:5px; float:right; display:none;
+}
+#remove_sub_btn2{
+    margin-top:5px; width: 35.979166px; margin-right:5px; float:right; display:none;
+}
+#expert_sub3{
+    display:none;
+}
+#add_sub_btn3{
+    margin-top: 0px; display:none;
+}
+#remove_sub_btn3{
+    margin-top:5px; width: 35.979166px; float:right; display:none;
+}
+#textarea2{
+    padding-bottom: 14px;
 }
 
 #selection-row{
@@ -44,7 +218,7 @@ div input{
     margin-bottom: 10px;
 }
 
-/* #individual-category{
+#individual-category{
     background-color: #F2F5A9;
     padding-top: 10px;
 }
@@ -59,7 +233,7 @@ div input{
 
 div table{
     background-color: #E6E6E6;
-} */
+}
 
 .btn-circle {
     width: 30px;
@@ -86,7 +260,7 @@ div textarea {
  }
 
  div text {
-     font-size: 14px;
+     font-size: 12px;
  }
 
  div select {
@@ -139,6 +313,10 @@ div textarea {
         width: 50%;
         padding-right: 0px;
     }
+    #gender1{
+        width: 50%;
+        padding-right: 0px;
+    }
     #form1_submit_row{
         padding-left: 50px;
     }
@@ -154,6 +332,10 @@ div textarea {
         padding-right: 0px;
     }
     #dob{
+        width: 50%;
+        padding-right: 0px;
+    }
+    #gender1{
         width: 50%;
         padding-right: 0px;
     }
